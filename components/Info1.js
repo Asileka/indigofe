@@ -1,21 +1,25 @@
 import { View, Text, Button } from "react-native";
-export default function Info1() {
+import { Radio } from "native-base";
+export default function Info1({ setShipmentMethodValue, shipmentMethodValue }) {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Text>Where are you wanting to ship?</Text>
       <Radio.Group
         name="shipmentMethod"
         accessibilityLabel="shipment method"
-        shipmentMthodValue={shipmentMthodValue}
+        value={shipmentMethodValue}
         onChange={(nextShipmentMethod) => {
-          setShipmentMethod(nextShipmentMethod);
+          setShipmentMethodValue(nextShipmentMethod);
         }}
       >
-        <Radio shipmentMthodValue="one" my={1}>
-          One
+        <Radio value="Standard UK&I" my={1}>
+          Standard UK&I
         </Radio>
-        <Radio shipmentMthodValue="two" my={1}>
-          Two
+        <Radio value="International" my={1}>
+          International
+        </Radio>
+        <Radio value="Intergalactic" my={1}>
+          Intergalactic
         </Radio>
       </Radio.Group>
     </View>
