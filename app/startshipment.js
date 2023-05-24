@@ -17,9 +17,10 @@ export default function StartShipment() {
   const handleWeightChange = (text) => setWeight(text);
   const [date, setDate] = useState("26/04/2024");
   const handleDateChange = (text) => setDate(text);
+  const [calculations, setCalculations] = useState("");
   function handleSubmit() {
     axios
-      .post("http://localhost:3000/api/shipmentinfo", {
+      .post("https://indigoapi.onrender.com/api/shipmentinfo", {
         "shipWeight": weight,
         "shipType": shipmentMethodValue,
         "shipSendAddrs": sendPostcodeValue,
@@ -27,7 +28,8 @@ export default function StartShipment() {
         "shipDate": date,
       })
       .then(function (response) {
-        console.log(response);
+        console.log(response.data);
+        setCalculations(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -71,6 +73,7 @@ export default function StartShipment() {
           placeholder="26/04/2024"
         />
         <Button title="Calculate My Shipping" onPress={handleSubmit} />
+        <Text>Your Shipment cost: ${calculations["Shipment Base Cost"]}</Text>
         <Button title="Go back" onPress={() => router.back()} />
       </View>
     </NativeBaseProvider>
